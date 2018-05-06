@@ -20,7 +20,8 @@ module Web
       #
       load_paths << [
         'controllers',
-        'views'
+        'views',
+        'resources'
       ]
 
       # Handle exceptions with HTTP statuses (true) or don't catch them (false).
@@ -103,7 +104,7 @@ module Web
       #             (only `:json` is supported)
       #           Object, the parser
       #
-      # body_parsers :json
+      body_parsers :json
 
       # When it's true and the router receives a non-encrypted request (http),
       # it redirects to the secure equivalent (https). Disabled by default.
@@ -262,6 +263,8 @@ module Web
         # include MyAuthentication # included in all the actions
         # before :authenticate!    # run an authentication before callback
       end
+
+      controller.format jsonapi: 'application/vnd.api+json'
 
       # Configure the code that will yield each time Web::View is included
       # This is useful for sharing common functionality

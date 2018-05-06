@@ -18,7 +18,6 @@ class RegisterUser
         @user_repository = user_repository || ::UserRepository.new
     end
 
-
     def call
         error!('The email is already taken') if email_already_registered?
 
