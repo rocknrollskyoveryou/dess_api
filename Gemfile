@@ -6,11 +6,16 @@ gem 'hanami-model', '~> 1.2'
 
 gem 'pg'
 
+gem 'jwt'
+gem 'bcrypt', require: false
+gem 'warden'
+
+gem 'transproc'
+
 group :development do
   # Code reloading
   # See: http://hanamirb.org/guides/projects/code-reloading
   gem 'shotgun', platforms: :ruby
-  gem 'hanami-webconsole'
 end
 
 group :test, :development do
@@ -23,5 +28,5 @@ group :test do
 end
 
 group :production do
-  # gem 'puma'
+  gem 'puma'
 end
