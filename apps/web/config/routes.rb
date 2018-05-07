@@ -6,6 +6,7 @@
 
 post '/registration', to: 'users#registration'
 post '/sessions', to: 'sessions#create'
+delete '/sessions', to: 'sessions#delete'
 
 # CORS
 #

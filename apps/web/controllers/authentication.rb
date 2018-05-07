@@ -33,11 +33,9 @@ module Web
             end
             
             def authenticate_user
-                request.env['warden'].authenticate!
-                user = request.env['warden'].user
-                if user && !user.revoked
-                    return @current_user = user
-                end
+                warden = request.env['warden']
+                warden.authenticate!
+                warden.user
             end
         end
     end

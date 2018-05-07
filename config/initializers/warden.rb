@@ -23,12 +23,12 @@ class AuthenticationJwtStrategy < ::Warden::Strategies::Base
     private
   
     def decoded_token
-        token = auth_token_from_headers # => fetch token: Authentication: 'Bearer <TOKEN>'
+        token = auth_token_from_headers # => fetch token: Authorization: 'Bearer <TOKEN>'
         token && ::JwtIssuer.decode(token)
     end
   
     def auth_token_from_headers
-        request.env.fetch('Authentication', '').sub(/Bearer\s/, '')
+        request.env.fetch('HTTP_AUTHORIZATION', '').sub(/Bearer\s/, '')
     end
 end
 
