@@ -1,4 +1,4 @@
-describe 'POST /sessions api' do
+describe 'POST /sessions' do
     include Rack::Test::Methods
 
     def app

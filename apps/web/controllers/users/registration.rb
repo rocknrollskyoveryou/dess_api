@@ -7,9 +7,7 @@ module Web
                 include JSONAPI::Hanami::Action
                 include Authentication::Skip
         
-                
                 accept :json
-                content_type :json
         
                 params do
                     required(:user).schema do
