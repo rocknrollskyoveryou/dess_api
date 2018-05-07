@@ -8,27 +8,15 @@ describe Web::Controllers::Users::Registration do
         Hanami.app
     end
 
-    it 'should register a new user' do 
+    it 'registers a new user' do 
         params = {"email" => "test5@example.com", "first_name" => "Tony", "last_name" => "Dif"}
         post '/registration', JSON.generate({ "user": params.merge({ "password" => "secret", "password_confirmation" => "secret" }) }), { "CONTENT_TYPE" => "application/json" }
         last_response.must_be :created?
         JSON.parse(last_response.body)['data']['attributes'].must_equal params
-    end    
-    # let(:action) { Web::Controllers::Users::Registration.new }
-    
+    end
 
-    # describe 'with invalid params' do
-    #     it 'it returns 422' do
-    #         response = action.call({})
-    #         response[0].must_equal 422
-    #     end
-
-    #     it 'it returns 201' do
-    #         response = action.call(params)
-    #         body = JSON.parse(response[2][0])
-    #         byebug
-    #         response[0].must_equal 201
-            
-    #     end    
-    # end
+    it 'refuse to register a new user' do
+        post '/registration', '', { "CONTENT_TYPE" => "application/json" }
+        last_response.must_be :unprocessable?
+    end
 end
