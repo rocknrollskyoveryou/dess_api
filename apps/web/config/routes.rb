@@ -5,6 +5,7 @@
 # get '/hello', to: ->(env) { [200, {}, ['Hello from Hanami!']] }
 
 post '/registration', to: 'users#registration'
+post '/sessions', to: 'sessions#create'
 
 # CORS
 #

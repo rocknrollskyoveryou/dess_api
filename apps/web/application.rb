@@ -86,6 +86,20 @@ module Web
 
       # Configure Rack middleware for this application
       #
+      middleware.use Warden::Manager do |manager|
+        manager.default_strategies :authentication_token
+        manager.failure_app = ->(_env) {
+          [
+            401,
+            {
+              'Access-Control-Allow-Origin'  => Settings::Cors::CORS_ALLOW_ORIGIN,
+              'Access-Control-Allow-Methods' => Settings::Cors::CORS_ALLOW_METHODS,
+              'Access-Control-Allow-Headers' => Settings::Cors::CORS_ALLOW_HEADERS
+            },
+            [ 'Authentication failure' ]
+          ]
+        }
+      end
       # middleware.use Rack::Protection
 
       # Default format for the requests that don't specify an HTTP_ACCEPT header
@@ -260,6 +274,9 @@ module Web
       #
       # See: http://www.rubydoc.info/gems/hanami-controller#Configuration
       controller.prepare do
+        include Web::Controllers::Authentication
+        include Web::Controllers::CorsHeaders
+  
         # include MyAuthentication # included in all the actions
         # before :authenticate!    # run an authentication before callback
       end
