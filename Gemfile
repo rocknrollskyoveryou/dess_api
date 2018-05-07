@@ -27,7 +27,8 @@ end
 
 group :test do
   gem 'minitest'
-  gem 'factory_bot'
+  gem 'capybara'
+  gem 'hanami-fabrication'
   gem 'faker'
 end
 
